@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -30,19 +31,18 @@ public class MainActivity extends AppCompatActivity {
         insert = (Button)findViewById(R.id.buttInsert);
         show = (Button)findViewById(R.id.buttShow);
 
-
-
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             String data =  etSongname.getText().toString() + etSingers.getText().toString() + etYear.getText().toString() + rgStars.getCheckedRadioButtonId();
 
-                rgStars.getCheckedRadioButtonId();
                 DBHelper dbh = new DBHelper(MainActivity.this);
 
-                long row_affected = dbh.insertSong(etSongname.getText().toString(), etSingers.getText().toString(),  Integer.parseInt(etYear.getText().toString()),rgStars.getCheckedRadioButtonId());
+                int selected = rgStars.getCheckedRadioButtonId();
+                RadioButton rb = (RadioButton)findViewById(selected);
+
+                long row_affected = dbh.insertSong(etSongname.getText().toString(), etSingers.getText().toString(),  Integer.parseInt(etYear.getText().toString()),Integer.parseInt(rb.getText().toString()));
                 dbh.close();
-                Toast.makeText(getBaseContext(), "Inserted", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(), "Inserted", Toast.LENGTH_SHORT).show();
 
 
             }
