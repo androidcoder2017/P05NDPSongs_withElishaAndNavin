@@ -54,8 +54,6 @@ public class SecondActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(SecondActivity.this, ThirdActivity.class);
                 Songs data = songs.get(position);
-
-
                 i.putExtra("data", data);
                 startActivityForResult(i, requestCodes);
             }

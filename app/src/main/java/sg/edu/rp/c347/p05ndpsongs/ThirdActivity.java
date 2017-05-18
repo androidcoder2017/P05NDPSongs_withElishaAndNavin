@@ -33,41 +33,46 @@ public class ThirdActivity extends AppCompatActivity {
         btnDelete = (Button)findViewById(R.id.buttonDelete);
         btnCancel = (Button)findViewById(R.id.buttonCancel);
 
-        int selected = rg.getCheckedRadioButtonId();
-        final RadioButton rb = (RadioButton)findViewById(selected);
+        RadioButton radio1 = (RadioButton) findViewById(R.id.radioButton);
+        RadioButton radio2 = (RadioButton) findViewById(R.id.radioButton2);
+        RadioButton radio3 = (RadioButton) findViewById(R.id.radioButton3);
+        RadioButton radio4 = (RadioButton) findViewById(R.id.radioButton4);
+        RadioButton radio5 = (RadioButton) findViewById(R.id.radioButton5);
+
+
 
         final Intent i = getIntent();
         data = (Songs) i.getSerializableExtra("data");
         tvID.setText("Song ID:" + data.getId());
-
-
         etTitle.setText(data.getSongTitle());
         etSingers.setText(data.getSingers());
         etYears.setText("" + data.getYear());
-        int stars = data.getYear();
+        final int starsSelected = data.getYear();
 
-
-        if (stars == 1) {
-            rb.setChecked(true);
-        } else if (stars == 2) {
-            rb.setChecked(true);
-        } else if (stars == 3) {
-            rb.setChecked(true);
-        } else if (stars == 4) {
-            rb.setChecked(true);
-        } else if (stars == 5) {
-            rb.setChecked(true);
+        if (starsSelected == 1) {
+            radio1.setChecked(true);
+        } else if (starsSelected == 2) {
+            radio2.setChecked(true);
+        } else if (starsSelected == 3) {
+            radio3.setChecked(true);
+        } else if (starsSelected == 4) {
+            radio4.setChecked(true);
+        }  else if (starsSelected == 5) {
+            radio5.setChecked(true);
         }
-
-
+        
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(ThirdActivity.this);
-                data.setSingers(etSingers.getText().toString());
+                RadioGroup rg = (RadioGroup)findViewById(R.id.radiogroup);
+                int selected = rg.getCheckedRadioButtonId();
+                RadioButton rb = (RadioButton)findViewById(selected);
+                int stars = Integer.parseInt(rb.getText().toString());
                 data.setSongtitle(etTitle.getText().toString());
+                data.setSingers(etSingers.getText().toString());
                 data.setYear(Integer.parseInt(etYears.getText().toString()));
-
+                data.setStar(stars);
                 dbh.updateSong(data);
                 dbh.close();
                 setResult(RESULT_OK, i);
