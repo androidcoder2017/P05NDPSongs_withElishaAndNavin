@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 rgStars.getCheckedRadioButtonId();
                 DBHelper dbh = new DBHelper(MainActivity.this);
                 //long row_affected = dbh.insertSong(data);
+                dbh.close();
             }
         });
 
