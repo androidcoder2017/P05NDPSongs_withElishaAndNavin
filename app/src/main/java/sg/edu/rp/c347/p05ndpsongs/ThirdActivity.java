@@ -82,6 +82,7 @@ public class ThirdActivity extends AppCompatActivity {
                 dbh.deleteSong(data.getId());
                 dbh.close();
                 setResult(RESULT_OK, i);
+                
                 finish();
             }
         });
