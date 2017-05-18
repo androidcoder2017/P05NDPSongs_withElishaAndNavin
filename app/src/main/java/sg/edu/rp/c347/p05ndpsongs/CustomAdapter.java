@@ -46,9 +46,10 @@ public class CustomAdapter extends ArrayAdapter<Songs> {
         iv3 = (ImageView) rowView.findViewById(R.id.threestar);
         iv4 = (ImageView) rowView.findViewById(R.id.fourstar);
         iv5 = (ImageView) rowView.findViewById(R.id.fivestar);
+        albumArt = (ImageView) rowView.findViewById(R.id.albumArt);
 
         Songs song = songs.get(position);
-        year.setText(song.getYear());
+        year.setText("" + song.getYear());
         songName.setText(song.getSongTitle());
         songArtist.setText(song.getSingers());
         albumArt.setImageResource(R.drawable.ic_library_music);

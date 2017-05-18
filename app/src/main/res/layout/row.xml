@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/tvYear"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="@color/colorAccent"
@@ -25,13 +25,13 @@
 
         <TextView
             android:id="@+id/tvSongName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/tvArtistName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
