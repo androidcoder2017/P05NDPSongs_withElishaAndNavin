@@ -117,5 +117,24 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public void updateSong(Songs data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SINGER, data.getSingers());
+        values.put(COLUMN_SONGTITLE, data.getSongTitle());
+        values.put(COLUMN_STAR, data.getStar());
+        values.put(COLUMN_YEAR, data.getYear());
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(data.getId())};
+        db.update(TABLE_SONG, values, condition,args);
+        db.close();
+    }
 
+    public void deleteSong(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(id)};
+        db.delete(TABLE_SONG, condition, args);
+        db.close();
+    }
 }
