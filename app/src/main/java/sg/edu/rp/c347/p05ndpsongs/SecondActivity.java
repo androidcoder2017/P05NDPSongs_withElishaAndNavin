@@ -36,19 +36,13 @@ public class SecondActivity extends AppCompatActivity {
         customAdapter.notifyDataSetChanged();
         db.close();
 
-
-//        for (int i = 0; i < songData.size(); i++) {
-//            Log.d("Database Content", i +". "+songData.get(i));
-//
-//
-//            songs.add(new Songs(i, songData.get(i).getSongTitle(), songData.get(i).getSingers(), songData.get(i).getYear(), songData.get(i).getStar() ));
-//        }
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHelper db = new DBHelper(SecondActivity.this);
-                db.getSongsWith5Stars();
+                songs.clear();
+                songs.addAll(db.getSongsWith5Stars());
+                customAdapter.notifyDataSetChanged();
                 db.close();
             }
         });
