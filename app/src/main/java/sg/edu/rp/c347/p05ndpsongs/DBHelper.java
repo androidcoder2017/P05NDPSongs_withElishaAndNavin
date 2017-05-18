@@ -93,29 +93,25 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Songs> getSongsWith5Stars () {
         ArrayList<Songs> songs = new ArrayList<Songs>();
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns= {COLUMN_ID, COLUMN_SINGER, COLUMN_SONGTITLE, COLUMN_STAR, COLUMN_YEAR};
-        String condition = COLUMN_STAR + " = ?";
-        String[] args = { "%" +  5 + "%"};
-        Cursor cursor = db.query(TABLE_SONG, columns, condition, args,
-                null, null, null, null);
+        String selectQuery = "SELECT " + COLUMN_ID + ", "
+                + COLUMN_SONGTITLE + ", " + COLUMN_SINGER +  ", "  + COLUMN_YEAR +  ", "
+                +    COLUMN_STAR +  " FROM " + TABLE_SONG + " WHERE " + COLUMN_STAR +  "= 5";
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                String singer = cursor.getString(1);
-                String songTitle = cursor.getString(2);
-                int star = cursor.getInt(3);
-                int yr = cursor.getInt(4);
-                Songs song = new Songs(id,singer,songTitle,star,yr);
-                songs.add(song);
+                String songTitle = cursor.getString(1);
+                String singer = cursor.getString(2);
+                int year = cursor.getInt(3);
+                int star = cursor.getInt(4);
+                Songs obj = new Songs(id, songTitle, singer, year, star);
+                songs.add(obj);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return songs;
-    }
 
-
-
-}
+}}

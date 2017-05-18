@@ -42,6 +42,7 @@ public class SecondActivity extends AppCompatActivity {
                 DBHelper db = new DBHelper(SecondActivity.this);
                 songs.clear();
                 songs.addAll(db.getSongsWith5Stars());
+                lv.setAdapter(customAdapter);
                 customAdapter.notifyDataSetChanged();
                 db.close();
             }
